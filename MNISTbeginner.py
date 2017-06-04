@@ -30,20 +30,24 @@ for i in range(1000):
 # print sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels})
 result = tf.argmax(y, 1)
 goal = tf.argmax(y_, 1)
+
 #random select 10 images
-test_xt, test_yt = mnist.train.next_batch(10)
-#test_xt = []
-for j in range(10):
-    #tmp = Tools.loadimage(str(j) + '.png')
-    # test_xt.append(tmp)
-    # Tools.showimage(test_xt[j])
+# test_xt, test_yt = mnist.train.next_batch(10)
+test_xt = []
+for j in range(1):
+    # tmp = Tools.loadimage(str(j) + '.png')
+    tmp = Tools.loadimage('testImage.png')
+    test_xt.append(tmp)
+    # Tools.saveimage(test_xt[j], str(j))
+
+    # show image
     img = np.reshape(test_xt[j], [28, 28])
     cv2.imshow(str(j), img)
     cv2.moveWindow(str(j), 30 * j, 0)
 
 #show result
 print sess.run(result, feed_dict={x: test_xt})
-print sess.run(goal, feed_dict={y_: test_yt})
+# print sess.run(goal, feed_dict={y_: test_yt})
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
